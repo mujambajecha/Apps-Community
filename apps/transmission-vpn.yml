@@ -18,7 +18,7 @@
         extport: '9091'
         intport2: '8888'
         extport2: '8888'
-        image: 'haugene/transmission-openvpn:latest'
+        image: 'mujambajecha/transmission-vpn:latest'
 
     # CORE (MANDATORY) ############################################################
     - name: 'Including cron job'
@@ -55,10 +55,10 @@
         pg_env:
           PUID: '1000'
           PGID: '1000'
-          OPENVPN_PROVIDER: 'see available configs at https://git.io/fpCSF'
-          OPENVPN_CONFIG: 'default'
-          OPENVPN_USERNAME: 'vpnuser'
-          OPENVPN_PASSWORD: 'vpnpass'
+          OPENVPN_PROVIDER: 'torguard'
+          OPENVPN_CONFIG: 'USA-CHICAGO'
+          OPENVPN_USERNAME: 'mujambajecha@outlook.com'
+          OPENVPN_PASSWORD: 'Goalis190#s'
           OPENVPN_OPTS: '--inactive 3600 --ping 10 --ping-exit 60'
           CREATE_TUN_DEVICE: 'true'
           WEBPROXY_ENABLED: 'true'
@@ -68,13 +68,40 @@
           TRANSMISSION_WEB_UI: 'transmission-web-control'
           TRANSMISSION_BLOCKLIST_ENABLED: 'true'
           TRANSMISSION_BLOCKLIST_URL: 'http://john.bitsurge.net/public/biglist.p2p.gz'
-          TRANSMISSION_DHT_ENABLED: 'false'
+          TRANSMISSION_DHT_ENABLED: 'true'
           TRANSMISSION_DOWNLOAD_DIR: '/mnt/downloads/{{pgrole}}'
           TRANSMISSION_INCOMPLETE_DIR: '/mnt/incomplete/{{pgrole}}'
           TRANSMISSION_RPC_PORT: '{{intport}}'
           TRANSMISSION_WATCH_DIR: '/mnt/torrent/watch'
-          TRANSMISSION_WATCH_DIR_ENABLED: 'false'
+          TRANSMISSION_WATCH_DIR_ENABLED: 'true'
           TRANSMISSION_HOME: '/config/home'
+          TRANSMISSION_SEED_QUEUE_ENABLED: 'true'
+          TRANSMISSION_SEED_QUEUE_SIZE: '5'
+          TRANSMISSION_ALT_SPEED_ENABLED: 'false'
+          TRANSMISSION_CACHE_SIZE_MB: '25'
+          TRANSMISSION_DOWNLOAD_LIMIT_ENABLED: 'false'
+          TRANSMISSION_DOWNLOAD_QUEUE_ENABLED: 'false'
+          TRANSMISSION_IDLE_SEEDING_LIMIT: '15'
+          TRANSMISSION_IDLE_SEEDING_LIMIT_ENABLED: 'true'
+          TRANSMISSION_INCOMPLETE_DIR_ENABLED: 'true'
+          TRANSMISSION_PORT_FORWARDING_ENABLED: 'true'
+          TRANSMISSION_PEER_PORT: '50403'
+          TRANSMISSION_LPD_ENABLED: 'true'
+          TRANSMISSION_MAX_PEERS_GLOBAL: '9999'
+          TRANSMISSION_PEER_LIMIT_GLOBAL: '9999'
+          TRANSMISSION_PEX_ENABLED: 'true'
+          TRANSMISSION_PEER_PORT_RANDOM_ON_START: 'false'
+          TRANSMISSION_PEER_LIMIT_PER_TORRENT: '9999'
+          TRANSMISSION_QUEUE_STALLED_ENABLED: 'true'
+          TRANSMISSION_QUEUE_STALLED_MINUTES: '30'
+          TRANSMISSION_RPC_AUTHENTICATION_REQUIRED: 'true'
+          TRANSMISSION_RPC_ENABLED: 'true'
+          TRANSMISSION_RPC_USERNAME: 'mujambajecha'
+          TRANSMISSION_RPC_PASSWORD: 'Goalis190#s'
+          TRANSMISSION_SPEED_LIMIT_DOWN_ENABLED: 'false'
+          TRANSMISSION_SPEED_LIMIT_UP_ENABLED: 'true'
+          TRANSMISSION_SPEED_LIMIT_UP: '500'
+          TRANSMISSION_START_ADDED_TORRENTS: 'true'
 
     # MAIN DEPLOYMENT #############################################################
     - name: 'Deploying {{pgrole}}'
@@ -111,3 +138,7 @@
       docker_container:
         name: '{{pgrole}}'
         state: stopped
+
+##PG-Community
+
+##PG-Community

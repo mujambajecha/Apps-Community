@@ -1,33 +1,34 @@
 #!/bin/bash
 #
-# Title:      Dozzle
-# Author(s):  Amir Raminfar (amir20)
-# URL:        https://dozzle.dev/ - https://github.com/amir20/dozzle
+# Title:      PGBlitz (Reference Title File)
+# Author(s):  mujambajecha
+# URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
 ---
 - hosts: localhost
   gather_facts: false
   tasks:
-    # CORE (MANDATORY) DO NOT CHANGE ###########################################
-
+    # FACTS #######################################################################
     - name: 'Set Known Facts'
       set_fact:
         pgrole: 'dozzle'
         intport: '8080'
-        extport: '8383'
+        extport: '8084'
         image: 'amir20/dozzle'
 
+    # CORE (MANDATORY) ############################################################
     - name: 'Including cron job'
       include_tasks: '/opt/communityapps/apps/_core.yml'
 
-    # LABELS #### KEEPS BOTTOM CLEAN ###########################################
+    # LABELS ######################################################################
     - name: 'Adding Traefik'
       set_fact:
         pg_labels:
           traefik.frontend.auth.forward.address: '{{gauth}}'
           traefik.enable: 'true'
           traefik.port: '{{intport}}'
+
           traefik.frontend.rule: 'Host:{{pgrole}}.{{domain.stdout}}{{tldset}}{{cname}}'
           traefik.frontend.headers.SSLHost: '{{domain.stdout}}'
           traefik.frontend.headers.SSLRedirect: 'true'
@@ -44,17 +45,15 @@
         pg_volumes:
           - '/var/run/docker.sock:/var/run/docker.sock'
           - '/etc/localtime:/etc/localtime:ro'
+          - '/opt/appdata/{{pgrole}}:/data'
 
     - name: 'Setting PG ENV'
       set_fact:
         pg_env:
-          DOZZLE_ADDR: ':8080'
-          DOZZLE_BASE: '/'
-          DOZZLE_LEVEL: 'info'
-          DOZZLE_TAILSIZE: '300'
+          PUID: '1000'
+          PGID: '1000'
 
-    # MAIN SCRIPT ##############################################################
-
+    # MAIN DEPLOYMENT #############################################################
     - name: 'Deploying {{pgrole}}'
       docker_container:
         name: '{{pgrole}}'
@@ -71,3 +70,7 @@
               - '{{pgrole}}'
         state: started
         labels: '{{pg_labels}}'
+
+##PG-Community
+
+##PG-Community
