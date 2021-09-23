@@ -81,14 +81,6 @@
             state: started
             labels: '{{pg_labels}}'
 
-        - name: Automatic Import
-          cron:
-            name: '{{pgrole}} Import'
-            user: 'root'
-            special_time: hourly
-            job: "s'"
-            state: present
-
         - name: YAML Creation Hold
           wait_for:
             path: '/opt/appdata/{{pgrole}}/config.yaml'
