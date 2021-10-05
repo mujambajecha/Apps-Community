@@ -133,11 +133,11 @@
         line: '"plugins_location": "/config/plugins",'
         state: present
 
-     - name: Set enabled_plugins
+    - name: Set enabled_plugins
       replace:
         dest: '/opt/appdata/{{pgrole}}/core.conf'
         regexp: '"enabled_plugins".*'
-        replace: '"enabled_plugins": ["Extractor", "Label", "LabelPlus", "AutoRemovePlus" ],'   
+        replace: '"enabled_plugins": ["Extractor", "Label", "LabelPlus", "AutoRemovePlus"],'   
 
     - name: Set move completed location
       lineinfile:
