@@ -133,12 +133,6 @@
         line: '"plugins_location": "/config/plugins",'
         state: present
 
-    - name: Set enabled_plugins
-      replace:
-        dest: '/opt/appdata/{{pgrole}}/core.conf'
-        regexp: '"enabled_plugins".*'
-        replace: '"enabled_plugins": ["Extractor", "Label", "LabelPlus", "AutoRemovePlus"],'   
-
     - name: Set move completed location
       lineinfile:
         path: '/opt/appdata/{{pgrole}}/core.conf'
@@ -195,7 +189,7 @@
           replace:
             dest: '/opt/appdata/{{pgrole}}/core.conf'
             regexp: '"enabled_plugins".*'
-            replace: '"enabled_plugins": ["Extractor", "Label"],'
+            replace: '"enabled_plugins": ["Extractor", "Label", "LabelPlus", "AutoRemovePlus"],'
 
         - name: set compact_allocation
           lineinfile:
