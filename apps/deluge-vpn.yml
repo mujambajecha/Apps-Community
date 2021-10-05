@@ -64,8 +64,8 @@
           - '/opt/appdata/{{pgrole}}/openvpn:/config/openvpn'
           - '{{path.stdout}}:{{path.stdout}}'
           - '/etc/localtime:/etc/localtime:ro'
-          - '/mnt:/mnt'
-          - '/dmx:/downloads'
+          - '/dmx/deluge-vpn/incomplete:/incomplete'
+          - '/mnt/downloads/deluge-vpn:/completed'
 
     - name: 'Setting PG ENV'
       set_fact:
@@ -106,7 +106,7 @@
           - name: plexguide
             aliases:
               - '{{pgrole}}'
-            ipv4_address: 172.18.0.56
+            ipv4_address: '172.18.0.56'
         state: started
         labels: '{{pg_labels}}'
 
@@ -133,6 +133,12 @@
         line: '"plugins_location": "/config/plugins",'
         state: present
 
+     - name: Set enabled_plugins
+      replace:
+        dest: '/opt/appdata/{{pgrole}}/core.conf'
+        regexp: '"enabled_plugins".*'
+        replace: '"enabled_plugins": ["Extractor", "Label", "LabelPlus", "AutoRemovePlus" ],'   
+
     - name: Set move completed location
       lineinfile:
         path: '/opt/appdata/{{pgrole}}/core.conf'
@@ -144,7 +150,7 @@
       lineinfile:
         path: '/opt/appdata/{{pgrole}}/core.conf'
         regexp: '"download_location".*'
-        line: '"download_location": "/downloads/incomplete",'
+        line: '"download_location": "/incomplete",'
         state: present
 
     - name: Setting torrent file directory
