@@ -15,7 +15,7 @@
         pgrole: 'lidarr-amd'
         intport: '8686'
         extport: '8484'
-        image: 'linuxserver/lidarr:nightly'
+        image: 'linuxserver/lidarr:latest'
 
     # CORE (MANDATORY) ############################################################
     - name: 'Including cron job'
