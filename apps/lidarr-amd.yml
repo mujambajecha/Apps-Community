@@ -44,7 +44,6 @@
         pg_volumes:
           - '/etc/localtime:/etc/localtime:ro'
           - '{{path.stdout}}:{{path.stdout}}'
-          - '/mnt:/mnt'
           - '/mnt/tcrypt/music:/music'
           - '/dmx/downloads-amd:/downloads-amd'
           - '/opt/appdata/{{pgrole}}:/config'
