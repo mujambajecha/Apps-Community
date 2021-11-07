@@ -16,7 +16,7 @@
         pgrole: 'beets24'
         intport: '8335'
         extport: '8335'
-        image: 'linuxserver/beets:latest'
+        image: 'linuxserver/beets:nightly'
 
     # CORE (MANDATORY) ############################################################
     - name: 'Including cron job'
