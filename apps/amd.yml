@@ -51,7 +51,6 @@
         pg_env:
           PUID: '1000'
           PGID: '1000'
-      env_file: '/opt/appdata/lidarr-amd/.env'
 
     # MAIN DEPLOYMENT #############################################################
     - name: 'Deploying {{pgrole}}'
@@ -63,6 +62,7 @@
           - '{{ports.stdout}}{{extport}}:{{intport}}'
         volumes: '{{pg_volumes}}'
         env: '{{pg_env}}'
+        env_file: '/config/.env'
         restart_policy: unless-stopped
         networks:
           - name: plexguide
