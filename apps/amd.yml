@@ -48,8 +48,9 @@
 
     - name: 'Setting PG ENV'
       set_fact:
-        pg_env:
-        env_file: '/config/.env'
+          PUID: '1000'
+          PGID: '1000'
+        pg_env: '/config/.env'
 
     # MAIN DEPLOYMENT #############################################################
     - name: 'Deploying {{pgrole}}'
