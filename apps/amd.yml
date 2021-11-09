@@ -42,7 +42,6 @@
     - name: 'Setting PG Volumes'
       set_fact:
         pg_volumes:
-          - '/var/run/docker.sock:/var/run/docker.sock'
           - '/etc/localtime:/etc/localtime:ro'
           - '/opt/appdata/lidarr-amd:/config'
           - '/dmx/downloads-amd:/downloads-amd'
@@ -72,7 +71,7 @@
           LidarrAPIkey: '38b6b901f6b64aa2b11a07214340842d'
           ARL_TOKEN: '266a6a2cb2cd2c6142e1a34f91fb911c745112e649ee5d1504159d5e8670c1f203e050b865353529014b140b59d8959a1a3125f9b5bce585780dd7dcb9362b45d543c1385fdb5127478b12829d48e09147248e1bd3c4a71df9c8b4ebe59b8dbe'
           NOTIFYPLEX: 'false'  
-          ALBUM_TYPE_FILTER: 'COMPILE, SINGLE' 
+          ALBUM_TYPE_FILTER: 'COMPILE' 
 
     # MAIN DEPLOYMENT #############################################################
     - name: 'Deploying {{pgrole}}'
