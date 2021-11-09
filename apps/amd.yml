@@ -51,7 +51,7 @@
         pg_env:
           PUID: '1000'
           PGID: '1000' 
-      env_file: '/config/.env'
+      env_file: '/opt/appdata/lidarr-amd/.env'
 
     # MAIN DEPLOYMENT #############################################################
     - name: 'Deploying {{pgrole}}'
