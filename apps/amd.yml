@@ -48,6 +48,9 @@
 
     - name: 'Setting PG ENV'
       set_fact:
+        pg_env:
+          PUID: '1000'
+          PGID: '1000'
       env_file: '/opt/appdata/lidarr-amd/.env'
 
     # MAIN DEPLOYMENT #############################################################
