@@ -50,6 +50,7 @@
           - '/mnt/tcrypt/music-24bit:/music-24bit'
           - '/mnt/tcrypt/downloads/music:/downloads'
           - '/dmx/completed:/dmx'
+          
     - name: 'Setting PG ENV'
       set_fact:
         pg_env:
