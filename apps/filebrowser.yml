@@ -50,7 +50,7 @@
         pg_volumes:
           - '/opt/appdata/{{pgrole}}/database.db:/database.db'
           - '/opt/appdata/{{pgrole}}/.filebrowser.json:/.filebrowser.json'
-          - '/mnt:/srv'
+          - '/mnt/tcrypt:/srv'
           - '/etc/localtime:/etc/localtime:ro'
 
     - name: 'Setting {{pgrole}} ENV'

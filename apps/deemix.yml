@@ -54,7 +54,7 @@
         pg_env:
           PUID: '1000'
           PGID: '1000'
-          ARL: 'b2426f3aa58cf6e7032ec5c532e6acdf50cc1f6140b42aa720c902240ce944ff723b48ac3235f130395a5484864cb40da63b3473b4420480b3ca4a09d07d0da356009806d4a887d40692caf282020c24f7275f466b09e2037a4e5748dc2d3588'
+
     # MAIN DEPLOYMENT #############################################################
     - name: 'Deploying {{pgrole}}'
       docker_container:
