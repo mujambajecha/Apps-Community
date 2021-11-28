@@ -54,55 +54,24 @@
         pg_env:
           PUID: '1000'
           PGID: '1000'
-          ARL: 'aa939d6e05e10a7d908cc4aff2c95f0341074e337a193c49fcf93422e9fe5f1e980cfc9fd3b1264b0700937466215e2a28495f7a2ac68b8aeedafbd3a71f935043ad5b106ed120cb05f81ad6bf1f09fb66a7efdf9da871d0b2db67132e347022'
+          ARL: 'b2426f3aa58cf6e7032ec5c532e6acdf50cc1f6140b42aa720c902240ce944ff723b48ac3235f130395a5484864cb40da63b3473b4420480b3ca4a09d07d0da356009806d4a887d40692caf282020c24f7275f466b09e2037a4e5748dc2d3588'
     # MAIN DEPLOYMENT #############################################################
-    - name: ConfCheck
-      stat:
-        path: '/opt/appdata/{{pgrole}}/config.yaml'
-      register: confcheck
-
-    - name: 'Configuring {{pgrole}} for first time use'
-      block:
-        - name: 'Deploying {{pgrole}}'
-          docker_container:
-            name: 'beets'
-            image: '{{image}}'
-            pull: yes
-            published_ports:
-              - '{{ports.stdout}}{{extport}}:{{intport}}'
-            volumes: '{{pg_volumes}}'
-            env: '{{pg_env}}'
-            restart_policy: unless-stopped
-            networks:
-              - name: plexguide
-                aliases:
-                  - '{{pgrole}}'
-            state: started
-            labels: '{{pg_labels}}'
-
-        - name: YAML Creation Hold
-          wait_for:
-            path: '/opt/appdata/{{pgrole}}/config.yaml'
-            state: present
-
-        - name: Container Stop
-          docker_container:
-            name: '{{pgrole}}'
-            state: stopped
-
-        - name: File Length Limit
-          lineinfile:
-            path: '/opt/appdata/{{pgrole}}/config.yaml'
-            line: 'max_filename_length: 255'
-            insertafter: per_disc*
-            state: present
-
-        - name: Contair Start
-          docker_container:
-            name: '{{pgrole}}'
-            state: started
-
-      when: not confcheck.stat.exists
+    - name: 'Deploying {{pgrole}}'
+      docker_container:
+        name: '{{pgrole}}'
+        image: '{{image}}'
+        pull: yes
+        published_ports:
+          - '{{ports.stdout}}{{extport}}:{{intport}}'
+        volumes: '{{pg_volumes}}'
+        env: '{{pg_env}}'
+        restart_policy: unless-stopped
+        networks:
+          - name: plexguide
+            aliases:
+              - '{{pgrole}}'
+        state: started
+        labels: '{{pg_labels}}'
 
 ##PG-Community
 
