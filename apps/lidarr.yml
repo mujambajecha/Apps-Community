@@ -14,7 +14,7 @@
       set_fact:
         pgrole: 'lidarr-amd'
         intport: '8686'
-        extport: '8484'
+        extport: '8686'
         image: 'linuxserver/lidarr:latest'
 
     # CORE (MANDATORY) ############################################################
@@ -22,7 +22,7 @@
       include_tasks: '/opt/coreapps/apps/_core.yml'
 
     - name: 'Including folders'
-      include_tasks: '/opt/communityapps/apps/_lidarr-amd.yml'
+      include_tasks: '/opt/communityapps/apps/_lidarr.yml'
 
     # LABELS ######################################################################
     - name: 'Adding Traefik'
