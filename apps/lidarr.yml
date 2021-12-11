@@ -12,7 +12,7 @@
     # FACTS #######################################################################
     - name: 'Set Known Facts'
       set_fact:
-        pgrole: 'lidarr-amd'
+        pgrole: 'lidarr'
         intport: '8686'
         extport: '8686'
         image: 'linuxserver/lidarr:latest'
