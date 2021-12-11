@@ -43,7 +43,7 @@
       set_fact:
         pg_volumes:
           - '/etc/localtime:/etc/localtime:ro'
-          - '/opt/appdata/lidarr-amd:/config'
+          - '/opt/appdata/lidarr:/config'
           - '/dmx/downloads-amd:/downloads-amd'
 
     - name: 'Setting PG ENV'
@@ -62,7 +62,7 @@
           - '{{ports.stdout}}{{extport}}:{{intport}}'
         volumes: '{{pg_volumes}}'
         env: '{{pg_env}}'
-        env_file: '/opt/appdata/lidarr-amd/.env'
+        env_file: '/opt/appdata/lidarr/.env'
         restart_policy: unless-stopped
         networks:
           - name: plexguide
