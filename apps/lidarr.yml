@@ -49,9 +49,11 @@
           - '{{path.stdout}}:{{path.stdout}}'
           - '/dmx/downloads-amd:/downloads-amd'
           - '/opt/appdata/{{pgrole}}:/config'
-          - '/opt/appdata/lidarr-amd/90-config:/etc/cont-init.d/90-config'
+          - '/opt/appdata/lidarr/90-config:/etc/cont-init.d/90-config'
           - '/var/run/docker.sock:/var/run/docker.sock'
-
+          - '/mnt/unionfs/music:/music'
+          - '/mnt:/mnt'
+          
     - name: 'Setting PG ENV'
       set_fact:
         pg_env:
