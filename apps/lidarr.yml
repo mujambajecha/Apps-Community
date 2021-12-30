@@ -52,7 +52,7 @@
           - '/opt/appdata/lidarr/90-config:/etc/cont-init.d/90-config'
           - '/var/run/docker.sock:/var/run/docker.sock'
           - '/mnt/unionfs/music:/music'
-          - '/mnt:/mnt'
+          - '/mnt/unionfs/.Trash-1000/lidarr:/trash'
           
     - name: 'Setting PG ENV'
       set_fact:
