@@ -13,9 +13,9 @@
 
     - name: 'Set Known Facts'
       set_fact:
-        pgrole: 'beets'
+        pgrole: 'beets-amd'
         intport: '8337'
-        extport: '8337'
+        extport: '8773'
         image: 'linuxserver/beets:nightly'
 
     # CORE (MANDATORY) ############################################################
@@ -47,7 +47,7 @@
           - '/opt/appdata/{{pgrole}}:/config'
           - '/etc/localtime:/etc/localtime:ro'
           - '{{path.stdout}}:{{path.stdout}}'
-          - '/mnt/tcrypt/music:/music'
+          - '/mnt/tcrypt/amd:/music'
           - '/mnt/tcrypt/downloads/music:/downloads'
 
     - name: 'Setting PG ENV'
