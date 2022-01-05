@@ -50,14 +50,14 @@
           PUID: '1000'
           PGID: '1000'
           TZ: 'America/New_York'
-          Lidarr_A_URL: 'https://lidarr-amd.pontiuspius.com'
+          Lidarr_A_URL: 'https://lidarr:8686'
           LIDARR_A_KEY: '38b6b901f6b64aa2b11a07214340842d'
-          LIDARR_B_URL: 'http://lidarr:8686'
-          LIDARR_B_KEY: '3034e7219ace4a7e9d15b286d74f4110'
+          LIDARR_B_URL: 'http://lidarr-amd:8686'
+          LIDARR_B_KEY: '38b6b901f6b64aa2b11a07214340842d'
           LIDARR_B_PROFILE: 'Any'
-          LIDARR_B_PATH: '/music'
+          LIDARR_B_PATH: '/amd'
           SYNC_INTERVAL_SECONDS: '300'
-          sync_bidirectionally = '1' # sync from instance A to B **AND** instance B to A (default 0)
+          sync_bidirectionally = '0' # sync from instance A to B **AND** instance B to A (default 0)
           auto_search = '0' # search is automatically started on new content - disable by setting to 0 (default 1)
           skip_missing = '1' # content with missing files are skipped on sync - disable by setting to 0 (default 1) (Radarr only)
           monitor_new_content = '0' # set to 0 to never monitor new content synced or to 1 to always monitor new content synced (default 1)

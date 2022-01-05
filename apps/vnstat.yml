@@ -1,27 +1,36 @@
+#!/bin/bash
+#
+#
 ################################################################################
 ---
 - hosts: localhost
   gather_facts: false
   tasks:
-    # CORE (MANDATORY) DO NOT CHANGE ###########################################
+    # FACTS #######################################################################
+    - name: 'Update repositories cache and install "vnstat" packag, if missing and update apt caches if older than 1 day.'
+      apt:
+        name: vnstat
+        update_cache: yes
+        cache_valid_time: 86400
 
     - name: 'Set Known Facts'
       set_fact:
-        pgrole: 'whoogle'
-        intport: '5000'
-        extport: '5002'
-        image: 'benbusby/whoogle-search'
+        pgrole: 'vnstat'
+        intport: '80'
+        extport: '8090'
+        image: 'mrdoob/vnstat:latest'
 
+    # CORE (MANDATORY) ############################################################
     - name: 'Including cron job'
       include_tasks: '/opt/communityapps/apps/_core.yml'
-
-    # LABELS #### KEEPS BOTTOM CLEAN ###########################################
-    - name: 'Adding Traefik for {{pgrole}} '
+        
+    # LABELS ######################################################################
+    - name: 'Adding Traefik'
       set_fact:
         pg_labels:
-          traefik.frontend.auth.forward.address: '{{gauth}}'
           traefik.enable: 'true'
           traefik.port: '{{intport}}'
+          traefik.frontend.auth.forward.address: '{{gauth}}'
           traefik.frontend.rule: 'Host:{{pgrole}}.{{domain.stdout}}{{tldset}}{{cname}}'
           traefik.frontend.headers.SSLHost: '{{domain.stdout}}'
           traefik.frontend.headers.SSLRedirect: 'true'
@@ -36,7 +45,9 @@
     - name: 'Setting {{pgrole}} Volumes'
       set_fact:
         pg_volumes:
-          - '/opt/appdata/{{pgrole}}:/config:rw'
+          - '/usr/bin/vnstat:/usr/bin/vnstat'
+          - '/var/lib/vnstat:/var/lib/vnstat'
+          - '/etc/localtime:/etc/localtime:ro'
 
     - name: 'Setting {{pgrole}} ENV'
       set_fact:
@@ -44,8 +55,7 @@
           PUID: '1000'
           PGID: '1000'
 
-    # MAIN SCRIPT ##############################################################
-
+    # MAIN DEPLOYMENT #############################################################
     - name: 'Deploying {{pgrole}}'
       docker_container:
         name: '{{pgrole}}'
@@ -55,10 +65,11 @@
           - '{{ports.stdout}}{{extport}}:{{intport}}'
         volumes: '{{pg_volumes}}'
         env: '{{pg_env}}'
-        restart_policy: unless-stopped
+        restart_policy: always
         networks:
           - name: plexguide
             aliases:
               - '{{pgrole}}'
         state: started
         labels: '{{pg_labels}}'
+    # OTHER ######################################################################
