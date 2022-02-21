@@ -48,7 +48,7 @@
           - '/opt/appdata/plexguide/rclone.conf:/config/rclone/rclone.conf:ro'
           - '/etc/localtime:/etc/localtime:ro'
           - '/var/run/docker.sock:/var/run/docker.sock'
-          - '/mnt/unionfs:/data'
+          - '/mnt:/mnt'
 
     - name: 'Setting {{pgrole}} ENV'
       set_fact:
