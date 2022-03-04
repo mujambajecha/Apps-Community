@@ -65,7 +65,7 @@
           - '{{path.stdout}}:{{path.stdout}}'
           - '/etc/localtime:/etc/localtime:ro'
           - '/dmx/deluge-vpn/incomplete:/incomplete'
-          - '/mnt/downloads/deluge-vpn:/completed'
+          - '/mnt/downloads/torrents:/mnt/downloads/torrents'
 
     - name: 'Setting PG ENV'
       set_fact:
